@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>notes</h2>
+    <h2>todos</h2>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Home',
+  name: 'Edit',
   components: {
     
   }

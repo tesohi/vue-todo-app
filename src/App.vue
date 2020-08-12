@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+	  <h1>to-do app</h1>
     <router-view />
   </div>
 </template>
@@ -13,4 +14,7 @@
   color: #2c3e50;
 }
 
+h1 {
+	text-transform: uppercase;
+}
 </style>
