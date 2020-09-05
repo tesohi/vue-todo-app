@@ -4,7 +4,7 @@
 		<Todo v-for="todo in note.todos.slice(0, 2)" :key="todo.id" v-bind:todo="todo"/>
 		<router-link 
 			:to="{ name: 'Edit', params: { id: note.id } }"
-			class="edit-btn"
+			class="edit-btn btn"
 		>
 			<span>edit</span>
 		</router-link>
@@ -28,11 +28,6 @@ export default {
 .edit-btn {
 	display: inline-block;
 	margin-top: 1rem;
-
-	span {
-		padding: .5rem;
-		background: rgb(119, 212, 75);
-		border-radius: 5px;
-	}
 }
+
 </style>

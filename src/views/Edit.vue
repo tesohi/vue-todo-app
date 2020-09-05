@@ -1,9 +1,12 @@
 <template>
 	<div class="wrapper">
-		<router-link to="/" class="back-btn">
+		<router-link to="/" class="back-btn btn">
 			<span>back</span>
 		</router-link>
 		<h2>{{note.title}}</h2>
+
+		<AddTodo v-bind:noteId="note.id"/>
+
 		<div class="todos">
 			<Todo v-for="todo in note.todos" :key="todo.id" v-bind:todo="todo" />
 		</div>
@@ -12,11 +15,13 @@
 
 <script>
 import Todo from '../components/Todo'
+import AddTodo from '../components/AddTodo'
 
 export default {
 	name: 'Edit',
 	components: {
-		Todo
+		Todo,
+		AddTodo
 	},	
 	props: [
 		'id'
@@ -38,11 +43,5 @@ export default {
 	position: absolute;
 	top: .3rem;
 	left: .3rem;
-
-	span {
-		padding: .5rem;
-		background: rgb(119, 212, 75);
-		border-radius: 5px;
-	}
 }
 </style>
