@@ -30,4 +30,7 @@ export default {
 	margin-top: 1rem;
 }
 
+.title {
+	font-size: 1.2rem;
+}
 </style>

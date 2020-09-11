@@ -1,27 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home'
-import Edit from '@/views/Edit'
-import Default from '@/views/Default'
+import Notes from '@/views/Notes'
 
 Vue.use(VueRouter)
 
 const routes = [
 	{
 		path: '/',
-		name: 'Home',
-		component: Home
+		name: 'Notes',
+		component: Notes
 	},
 	{
 		path: '/edit/:id',
 		name: 'Edit',
 		props: true,
-		component: Edit
+		component: () => import('@/views/Edit')
 	},
 	{
 		path: '*',
 		name: 'Default',
-		component: Default
+		component: () => import('@/views/Default')
 	}
 	
 ]

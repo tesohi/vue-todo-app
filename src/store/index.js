@@ -5,47 +5,47 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		notes: [
-			{
-				id: 1,
-				title: 'main activities',
-				todos: [
-					{ id: 100, body: 'create the todo application', completed: false, noteId: 1 },
-					{ id: 101, body: 'get a good job', completed: false, noteId: 1 },
-					{ id: 102, body: 'be cool', completed: false, noteId: 1 }
-				]
-			},
-			{
-				id: 2,
-				title: 'side activities',
-				todos: [
-					{ id: 200, body: 'do one', completed: false, noteId: 2 },
-					{ id: 201, body: 'do two', completed: false, noteId: 2 },
-					{ id: 202, body: 'do three', completed: false, noteId: 2 }
-				]
-			},
-		],
+		notes: JSON.parse(localStorage.getItem('notes') || '[]')
 	},
 
 	getters: {
 		allNotes: state => {
 			return state.notes
 		},
-		getNoteById: state => id => {
+		noteById: state => id => {
 			return state.notes.find(note => note.id === parseInt(id))
 		}
 	},
 
 	actions: {
+		addNote({ commit }, note) {
+			commit('newNote', note)
+		},
 		addTodo({ commit }, todo) {
-
 			commit('newTodo', todo)
+		},
+		updateTodo({ commit }, todo) {
+			commit('updateTodo', todo)
 		}
 	},
 
 	mutations: {
+		newNote: (state, note) => {
+			state.notes.unshift(note)
+			
+			localStorage.setItem('notes', JSON.stringify(state.notes))
+		},
 		newTodo: (state, todo) => {
 			state.notes.find(note => note.id === todo.noteId).todos.unshift(todo)
+			
+			localStorage.setItem('notes', JSON.stringify(state.notes))
+		},
+		updateTodo: (state, todo) => {
+			const todosByNoteId = state.notes.find(note => note.id === todo.noteId).todos
+			let todoById = todosByNoteId.find(t => t.id === todo.id)
+			todoById = todo
+
+			localStorage.setItem('notes', JSON.stringify(state.notes))
 		}
 	},
 

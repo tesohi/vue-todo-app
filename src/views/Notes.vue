@@ -1,18 +1,21 @@
 <template>
-	<div class="home">
+	<div class="notes">
 		<h2>notes</h2>
+		<addNote/>
 		<Note v-for="note in allNotes" :key="note.id" v-bind:note="note"/>
 	</div>
 </template>
 
 <script>
 import Note from '../components/Note'
+import addNote from '../components/AddNote'
 import { mapGetters } from 'vuex'
 
 export default {
-	name: 'Home',
+	name: 'Notes',
 	components: {
-		Note
+		Note,
+		addNote
 	},
 	computed: {
 		...mapGetters(['allNotes'])

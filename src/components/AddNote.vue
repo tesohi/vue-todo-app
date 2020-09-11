@@ -1,8 +1,8 @@
 <template>
 	<div class="wrapper">
 		<form @submit.prevent="onSubmit">
-			<input type="text" v-model="todoBody">
-			<input type="submit" value="Add Todo" >
+			<input type="text" v-model="noteTitle">
+			<input type="submit" value="Add Note" >
 		</form>
 	</div>
 </template>
@@ -12,28 +12,24 @@ import vuex from 'vuex'
 import { mapActions } from 'vuex'
 
 export default {
-	name: 'AddTodo',
+	name: 'AddNote',
 	data() {
 		return {
-			todoBody: ''
+			noteTitle: ''
 		}
 	},
-	props: [
-		'noteId'
-	],
 	methods: {
-		...mapActions(['addTodo']),
+		...mapActions(['addNote']),
 		onSubmit() {
-			const todo = {
+			const note = {
 				id: Date.now(),
-				body: this.todoBody,
-				completed: false,
-				noteId: this.noteId
+				title: this.noteTitle,
+				todos: []
 			};
 			
-			this.addTodo(todo)
+			this.addNote(note)
 
-			this.todoBody = ''
+			this.noteTitle = ''
 		}
 	}
 }

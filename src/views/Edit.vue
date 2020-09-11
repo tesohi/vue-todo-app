@@ -1,11 +1,14 @@
 <template>
 	<div class="wrapper">
-		<router-link to="/" class="back-btn btn">
-			<span>back</span>
-		</router-link>
 		<h2>{{note.title}}</h2>
 
 		<AddTodo v-bind:noteId="note.id"/>
+
+		<div class="actions">
+			<router-link to="/" class="back-btn btn">
+				<span>back</span>
+			</router-link>
+		</div>
 
 		<div class="todos">
 			<Todo v-for="todo in note.todos" :key="todo.id" v-bind:todo="todo" />
@@ -28,7 +31,7 @@ export default {
 	],
 	computed: {
 		note() {
-			return this.$store.getters.getNoteById(this.id)
+			return this.$store.getters.noteById(this.id)
 		}
 	}
 }
@@ -39,9 +42,15 @@ export default {
 	position: relative;
 }
 
+.actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 3rem;
+	padding: .3rem .5rem;
+}
+
 .back-btn {
-	position: absolute;
-	top: .3rem;
-	left: .3rem;
+	
 }
 </style>
