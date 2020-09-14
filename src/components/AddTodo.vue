@@ -24,6 +24,10 @@ export default {
 	methods: {
 		...mapActions(['addTodo']),
 		onSubmit() {
+			if (this.todoBody === '') {
+				return
+			}
+
 			const todo = {
 				id: Date.now(),
 				body: this.todoBody,

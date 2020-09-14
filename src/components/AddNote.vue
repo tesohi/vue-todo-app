@@ -21,6 +21,10 @@ export default {
 	methods: {
 		...mapActions(['addNote']),
 		onSubmit() {
+			if (this.noteTitle === '') {
+				return
+			}
+
 			const note = {
 				id: Date.now(),
 				title: this.noteTitle,

@@ -1,7 +1,12 @@
 <template>
 	<div class="todo">
-		<input type="checkbox" v-model="isDone" @click="statusHandler">
-		<span :class="{ done: isDone }">{{todo.body}}</span>
+		<input type="checkbox" class="check-done" v-model="isDone" @click="statusHandler">
+		<span :class="{ done: isDone }">
+			{{todo.body}}
+		</span>
+		<div class="delete" @click="deleteHandler">
+			<span>delete</span>
+		</div>
 	</div>
 </template>
 
@@ -18,11 +23,14 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions(['updateTodo']),
+		...mapActions(['updateTodo', 'deleteTodo']),
 		statusHandler() {
 			this.isDone = !this.isDone
 			this.todo.completed = this.isDone
 			this.updateTodo(this.todo)
+		},
+		deleteHandler() {
+			this.deleteTodo(this.todo)
 		}
 	}
 }
@@ -30,14 +38,34 @@ export default {
 
 <style lang="scss" scoped>
 .todo {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
 	align-items: center;
+	background: #e8f7f0;
+	border-radius: 5px;
 }
 .done {
 	text-decoration: line-through;
 }
 
-span {
+.check-done {
 	margin: 0 .5rem;
+	line-height: 1.3rem;
+}
+
+.delete {
+	display: grid;
+	place-items: center;
+	height: 1.5rem;
+	background: rgb(226, 67, 77);
+	border-radius: 5px;
+	padding: 0 .3rem;
+	margin: 0 .5rem;
+	cursor: pointer;
+	user-select: none;
+
+	span {
+		color: rgb(238, 238, 238);
+	}
 }
 </style>

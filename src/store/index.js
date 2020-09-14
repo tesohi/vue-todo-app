@@ -26,6 +26,12 @@ export default new Vuex.Store({
 		},
 		updateTodo({ commit }, todo) {
 			commit('updateTodo', todo)
+		},
+		deleteTodo({ commit }, todo) {
+			commit('deleteTodo', todo)
+		},
+		deleteNote({ commit }, note) {
+			commit('deleteNote', note)
 		}
 	},
 
@@ -44,6 +50,19 @@ export default new Vuex.Store({
 			const todosByNoteId = state.notes.find(note => note.id === todo.noteId).todos
 			let todoById = todosByNoteId.find(t => t.id === todo.id)
 			todoById = todo
+
+			localStorage.setItem('notes', JSON.stringify(state.notes))
+		},
+		deleteTodo: (state, todo) => {
+			let todosByNoteId = state.notes.find(note => note.id === todo.noteId).todos
+			let indexOfTodo = todosByNoteId.indexOf(todo)
+			todosByNoteId.splice(indexOfTodo, 1)
+
+			localStorage.setItem('notes', JSON.stringify(state.notes))
+		},
+		deleteNote: (state, note) => {
+			let indexOfNote = state.notes.indexOf(note)
+			state.notes.splice(indexOfNote, 1)
 
 			localStorage.setItem('notes', JSON.stringify(state.notes))
 		}

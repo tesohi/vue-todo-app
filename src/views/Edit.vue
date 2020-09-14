@@ -42,6 +42,10 @@ export default {
 	position: relative;
 }
 
+.todo {
+	background: #d4f1e3;
+}
+
 .actions {
 	display: flex;
 	justify-content: space-between;
@@ -50,7 +54,10 @@ export default {
 	padding: .3rem .5rem;
 }
 
-.back-btn {
-	
+.control-btn {
+
+	span {
+		background: rgb(75, 173, 212);
+	}
 }
 </style>
